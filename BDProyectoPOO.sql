@@ -29,7 +29,6 @@ create table Tipo(
 create table Descripcion(
 	IDDESCRIPCION integer auto_increment,
     TIPOANIMAL integer,
-    IDRESCATISTA integer,
     Historia varchar(255),
     Edad tinyint,
     Color varchar(8),
@@ -39,11 +38,8 @@ create table Descripcion(
     foreign key (TIPOANIMAL) references Tipo (IDTIPO)
     on delete cascade
     on update cascade,
-    foreign key (IDRESCATISTA) references Rescatista (IDRESC)
-    on delete cascade
-    on update cascade,
-    primary key (IDDESCRIPCION, TIPOANIMAL, IDRESCATISTA)
-);
+    primary key (IDDESCRIPCION)
+);	
 
 create table Mascota(
 	IDMASCOTA integer auto_increment,
@@ -53,7 +49,7 @@ create table Mascota(
     foreign key (IDRESCATISTA) references Rescatista (IDRESC)
     on delete cascade
     on update cascade,
-    primary key (IDMASCOTA, IDRESCATISTA)
+    primary key (IDMASCOTA)
 );
 
 delimiter **
@@ -97,6 +93,7 @@ delimiter ;
 
 delimiter **
 create procedure descripcion_add (
+    tipo integer,
     historia varchar(255),
     edad tinyint,
     color varchar(8),
@@ -104,17 +101,18 @@ create procedure descripcion_add (
     vacuna char
 )
 begin
-	insert into Descripcion (Historia, Edad, Color, Sexo, Vacuna)
-    values (historia, edad, color, sexo, vacuna);
+	insert into Descripcion (TIPOANIMAL, Historia, Edad, Color, Sexo, Vacuna)
+    values (tipo, historia, edad, color, sexo, vacuna);
 end**
 delimiter ;
 
 delimiter **
 create procedure mascota_add (
+	rescatista integer,
 	nombre varchar(10)
 )
 begin
-	insert into Mascota (Nombre)
-    values (nombre);
+	insert into Mascota (IDRESCATISTA, Nombre)
+    values (rescatista, nombre);
 end**
 delimiter ;
