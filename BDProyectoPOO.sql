@@ -23,7 +23,7 @@ create table Rescatista(
 create table Tipo(
 	IDTIPO integer auto_increment primary key,
     Tipo char,
-    Raza varchar(10)
+    Raza varchar(20)
 );
 
 create table Descripcion(
@@ -44,9 +44,13 @@ create table Descripcion(
 create table Mascota(
 	IDMASCOTA integer auto_increment,
     IDRESCATISTA integer,
+    IDDESC integer,
 	Nombre varchar(10),
     
     foreign key (IDRESCATISTA) references Rescatista (IDRESC)
+    on delete cascade
+    on update cascade,
+    foreign key (IDDESC) references Rescatista (IDRESC)
     on delete cascade
     on update cascade,
     primary key (IDMASCOTA)
@@ -83,7 +87,7 @@ delimiter ;
 delimiter **
 create procedure tipo_add (
 	tipo char,
-    raza varchar(10)
+    raza varchar(20)
 )
 begin
 	insert into Tipo (Tipo, Raza)
@@ -109,10 +113,11 @@ delimiter ;
 delimiter **
 create procedure mascota_add (
 	rescatista integer,
+    descripcion integer,
 	nombre varchar(10)
 )
 begin
-	insert into Mascota (IDRESCATISTA, Nombre)
-    values (rescatista, nombre);
+	insert into Mascota (IDRESCATISTA, IDDESC, Nombre)
+    values (rescatista, descripcion, nombre);
 end**
 delimiter ;
