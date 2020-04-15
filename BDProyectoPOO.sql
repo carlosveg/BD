@@ -31,7 +31,7 @@ create table Descripcion(
     TIPOANIMAL integer,
     Historia varchar(255),
     Edad tinyint,
-    Color varchar(8),
+    Color varchar(30),
     Sexo char,
     Vacuna char,
     
@@ -100,7 +100,7 @@ create procedure descripcion_add (
     tipo integer,
     historia varchar(255),
     edad tinyint,
-    color varchar(8),
+    color varchar(30),
     sexo char,
     vacuna char
 )
