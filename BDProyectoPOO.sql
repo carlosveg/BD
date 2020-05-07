@@ -17,43 +17,45 @@ create table Rescatista(
     Nombre varchar(15),
     ApPat varchar(15),
     ApMat varchar(15),
-    Telefono integer
+    Telefono integer,
+    Usuario varchar(15),
+    Contraseña varchar(10)
 );
 
 create table Tipo(
 	IDTIPO integer auto_increment primary key,
     Tipo char,
-    Raza varchar(10)
+    Raza varchar(20)
 );
 
 create table Descripcion(
 	IDDESCRIPCION integer auto_increment,
     TIPOANIMAL integer,
-    IDRESCATISTA integer,
     Historia varchar(255),
-    Edad tinyint,
-    Color varchar(8),
+    Edad integer,
+    Color varchar(30),
     Sexo char,
     Vacuna char,
     
     foreign key (TIPOANIMAL) references Tipo (IDTIPO)
     on delete cascade
     on update cascade,
-    foreign key (IDRESCATISTA) references Rescatista (IDRESC)
-    on delete cascade
-    on update cascade,
-    primary key (IDDESCRIPCION, TIPOANIMAL, IDRESCATISTA)
-);
+    primary key (IDDESCRIPCION)
+);	
 
 create table Mascota(
 	IDMASCOTA integer auto_increment,
     IDRESCATISTA integer,
+    IDDESC integer,
 	Nombre varchar(10),
     
     foreign key (IDRESCATISTA) references Rescatista (IDRESC)
     on delete cascade
     on update cascade,
-    primary key (IDMASCOTA, IDRESCATISTA)
+    foreign key (IDDESC) references Rescatista (IDRESC)
+    on delete cascade
+    on update cascade,
+    primary key (IDMASCOTA)
 );
 
 delimiter **
@@ -87,7 +89,7 @@ delimiter ;
 delimiter **
 create procedure tipo_add (
 	tipo char,
-    raza varchar(10)
+    raza varchar(20)
 )
 begin
 	insert into Tipo (Tipo, Raza)
@@ -97,24 +99,47 @@ delimiter ;
 
 delimiter **
 create procedure descripcion_add (
+    tipo integer,
     historia varchar(255),
     edad tinyint,
-    color varchar(8),
+    color varchar(30),
     sexo char,
     vacuna char
 )
 begin
-	insert into Descripcion (Historia, Edad, Color, Sexo, Vacuna)
-    values (historia, edad, color, sexo, vacuna);
+	insert into Descripcion (TIPOANIMAL, Historia, Edad, Color, Sexo, Vacuna)
+    values (tipo, historia, edad, color, sexo, vacuna);
 end**
 delimiter ;
 
 delimiter **
 create procedure mascota_add (
+	rescatista integer,
+    descripcion integer,
 	nombre varchar(10)
 )
 begin
-	insert into Mascota (Nombre)
-    values (nombre);
+	insert into Mascota (IDRESCATISTA, IDDESC, Nombre)
+    values (rescatista, descripcion, nombre);
+end**
+delimiter ;
+
+/*
+NOTA: Faltan los procedimientos de modificar y eliminar.
+*/
+
+delimiter **
+create procedure rescatista_update (
+	id integer,
+	nombre varchar(15),
+    appat varchar(15),
+    apmat varchar(15),
+    telefono integer
+)
+begin
+	update rescatista set Nombre = nombre where IDRESC = id;
+    update rescatista set ApPat = appat where IDRESC = id;
+    update rescatista set ApMat = apmat where IDRESC = id;
+    update rescatista set Telefono = telefono where IDRESC = id;
 end**
 delimiter ;
