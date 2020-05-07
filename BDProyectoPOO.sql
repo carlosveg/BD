@@ -52,7 +52,7 @@ create table Mascota(
     foreign key (IDRESCATISTA) references Rescatista (IDRESC)
     on delete cascade
     on update cascade,
-    foreign key (IDDESC) references Rescatista (IDRESC)
+    foreign key (IDDESC) references Descripcion (IDDESCRIPCION)
     on delete cascade
     on update cascade,
     primary key (IDMASCOTA)
