@@ -211,7 +211,7 @@ end**
 delimiter ;
 
 /*
-Procedimientos para modificar.
+Procedimientos para eliminar.
 */
 
 delimiter **
