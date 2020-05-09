@@ -56,6 +56,8 @@ create table Mascota(
     primary key (IDMASCOTA)
 );
 
+/* Procedimientos para agregar */
+
 delimiter **
 create procedure admin_add (
 	nombre varchar(15),
@@ -162,6 +164,52 @@ begin
 end**
 delimiter ;
 
+delimiter **
+create procedure tipo_update (
+	id int,
+    tipo char,
+    raza varchar(20)
+)
+begin
+	update tipo set TIPO = tipo where IDTIPO = id;
+    update tipo set Raza = raza where IDTIPO = id;
+end**
+delimiter ;
+
+delimiter **
+create procedure descripcion_update (
+	id int,
+    tipo int,
+    historia varchar(255),
+    edad int,
+    color varchar(30),
+    sexo char,
+    vacuna char
+)
+begin
+	update descripcion set TIPOANIMAL = tipo where IDDESCRIPCION = id;
+    update descripcion set Historia = historia where IDDESCRIPCION = id;
+    update descripcion set Edad = edad where IDDESCRIPCION = id;
+    update descripcion set Color = color where IDDESCRIPCION = id;
+    update descripcion set Sexo = sexo where IDDESCRIPCION = id;
+    update descripcion set Vacuna = vacuna where IDDESCRIPCION = id;
+end**
+delimiter ;
+
+delimiter **
+create procedure mascota_update (
+	id int,
+    idr int,
+    idd int,
+    nombre varchar(10)
+)
+begin
+	update mascota set IDRESCATISTA = idr where IDMASCOTA = id;
+    update mascota set IDDESC = idd where IDMASCOTA = id;
+    update mascota set Nombre = nombre where IDMASCOTA = id;
+end**
+delimiter ;
+
 /*
 Procedimientos para modificar.
 */
@@ -181,5 +229,32 @@ create procedure rescatista_delete (
 )
 begin
 	delete from rescatista where IDRESC = id;
+end**
+delimiter ;
+
+delimiter **
+create procedure tipo_delete (
+	id int
+)
+begin
+	delete from tipo where IDTIPO = id;
+end**
+delimiter ;
+
+delimiter **
+create procedure descripcion_delete (
+	id int
+)
+begin
+	delete from descripcion where IDDESCRIPCION = id;
+end**
+delimiter ;
+
+delimiter **
+create procedure mascota_delete (
+	id int
+)
+begin
+	delete from mascota where IDMASCOTA = id;
 end**
 delimiter ;

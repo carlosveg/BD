@@ -41,13 +41,19 @@ call descripcion_add (13, "encontrado en la calle x", 6, "blanco", "h", 'n');
 
 /* Agregamos a la mascota */
 call mascota_add (1, 1, "firulais");
-call mascota_add (2, 2, "nala");
-call mascota_add (1, 3, "solovino");
-
-call rescatista_update (1, "resca1", "juarez", "morales", 55667788);
+call mascota_add (1, 2, "nala");
+call mascota_add (1, 4, "solovino");
 
 call admin_update (1, "Juan", "Perez", "Perez", 12345678, "juan", "perez");
+call rescatista_update (1, "resca1", "juarez", "morales", 55667788);
+call tipo_update (1, "p", "Bull terrier");
+call descripcion_update (4, 14, "extraviado", 5, "blanco con negro", "h", 's');
+call mascota_update (5, 1, 4, "zeus");
 
 call admin_delete (1);
+call rescatista_delete (2);
+call tipo_delete (12);
+call descripcion_delete (3);
+call mascota_delete (9);
 
-select * from administrador;
+select * from mascota;
