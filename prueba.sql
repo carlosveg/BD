@@ -36,12 +36,18 @@ call tipo_add ('g', "Bombay");
 
 /* Agregamos descripciones de mascotas */
 call descripcion_add (1, "maltrato en el hogar", 4, "café", "M", "s");
-call descripcion_add (14, "encontrado en la calle x", 6, "blanco", "h", 'n');
+call descripcion_add (2, "Abandono", 5, "negro", "m", "s");
+call descripcion_add (13, "encontrado en la calle x", 6, "blanco", "h", 'n');
 
 /* Agregamos a la mascota */
 call mascota_add (1, 1, "firulais");
 call mascota_add (2, 2, "nala");
+call mascota_add (1, 3, "solovino");
 
 call rescatista_update (1, "resca1", "juarez", "morales", 55667788);
 
-select * from rescatista;
+call admin_update (1, "Juan", "Perez", "Perez", 12345678, "juan", "perez");
+
+call admin_delete (1);
+
+select * from administrador;

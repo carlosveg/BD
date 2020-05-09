@@ -17,9 +17,7 @@ create table Rescatista(
     Nombre varchar(15),
     ApPat varchar(15),
     ApMat varchar(15),
-    Telefono integer,
-    Usuario varchar(15),
-    Contraseña varchar(10)
+    Telefono integer
 );
 
 create table Tipo(
@@ -125,8 +123,28 @@ end**
 delimiter ;
 
 /*
-NOTA: Faltan los procedimientos de modificar y eliminar.
+Procedimientos para modificar.
 */
+
+delimiter **
+create procedure admin_update (
+	id integer,
+    nombre varchar(15),
+    appat varchar(15),
+    apmat varchar(15),
+    telefono integer,
+    usuario varchar(15),
+    contraseña varchar(10)
+)
+begin
+	update administrador set Nombre = nombre where IDADMIN = id;
+    update administrador set ApPat = appat where IDADMIN = id;
+    update administrador set ApMat = apmat where IDADMIN = id;
+    update administrador set Telefono = telefono where IDADMIN = id;
+    update administrador set Usuario = usuario where IDADMIN = id;
+    update administrador set Contraseña = contraseña where IDADMIN = id;
+end**
+delimiter ;
 
 delimiter **
 create procedure rescatista_update (
@@ -141,5 +159,27 @@ begin
     update rescatista set ApPat = appat where IDRESC = id;
     update rescatista set ApMat = apmat where IDRESC = id;
     update rescatista set Telefono = telefono where IDRESC = id;
+end**
+delimiter ;
+
+/*
+Procedimientos para modificar.
+*/
+
+delimiter **
+create procedure admin_delete (
+	id integer
+)
+begin
+	delete from administrador where IDADMIN = id;
+end**
+delimiter ;
+
+delimiter **
+create procedure rescatista_delete (
+	id integer
+)
+begin
+	delete from rescatista where IDRESC = id;
 end**
 delimiter ;
