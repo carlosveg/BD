@@ -56,4 +56,4 @@ call tipo_delete (12);
 call descripcion_delete (3);
 call mascota_delete (9);
 
-select * from mascota;
+select * from rescatista;
