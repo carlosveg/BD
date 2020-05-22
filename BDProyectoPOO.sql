@@ -22,7 +22,7 @@ create table Rescatista(
 
 create table Tipo(
 	IDTIPO integer auto_increment primary key,
-    Tipo char,
+    Tipo varchar(6),
     Raza varchar(20)
 );
 
@@ -32,8 +32,8 @@ create table Descripcion(
     Historia varchar(255),
     Edad integer,
     Color varchar(30),
-    Sexo char,
-    Vacuna char,
+    Sexo varchar(10),
+    Vacuna varchar(10),
     
     foreign key (TIPOANIMAL) references Tipo (IDTIPO)
     on delete cascade
@@ -45,7 +45,7 @@ create table Mascota(
 	IDMASCOTA integer auto_increment,
     IDRESCATISTA integer,
     IDDESC integer,
-	Nombre varchar(10),
+	Nombre varchar(20),
     
     foreign key (IDRESCATISTA) references Rescatista (IDRESC)
     on delete cascade
@@ -88,7 +88,7 @@ delimiter ;
 
 delimiter **
 create procedure tipo_add (
-	tipo char,
+	tipo varchar(6),
     raza varchar(20)
 )
 begin
@@ -103,8 +103,8 @@ create procedure descripcion_add (
     historia varchar(255),
     edad tinyint,
     color varchar(30),
-    sexo char,
-    vacuna char
+    sexo varchar(10),
+    vacuna varchar(10)
 )
 begin
 	insert into Descripcion (TIPOANIMAL, Historia, Edad, Color, Sexo, Vacuna)
@@ -116,7 +116,7 @@ delimiter **
 create procedure mascota_add (
 	rescatista integer,
     descripcion integer,
-	nombre varchar(10)
+	nombre varchar(20)
 )
 begin
 	insert into Mascota (IDRESCATISTA, IDDESC, Nombre)
@@ -167,7 +167,7 @@ delimiter ;
 delimiter **
 create procedure tipo_update (
 	id int,
-    tipo char,
+    tipo varchar(6),
     raza varchar(20)
 )
 begin
@@ -183,8 +183,8 @@ create procedure descripcion_update (
     historia varchar(255),
     edad int,
     color varchar(30),
-    sexo char,
-    vacuna char
+    sexo varchar(10),
+    vacuna varchar(10)
 )
 begin
 	update descripcion set TIPOANIMAL = tipo where IDDESCRIPCION = id;
@@ -201,7 +201,7 @@ create procedure mascota_update (
 	id int,
     idr int,
     idd int,
-    nombre varchar(10)
+    nombre varchar(20)
 )
 begin
 	update mascota set IDRESCATISTA = idr where IDMASCOTA = id;
