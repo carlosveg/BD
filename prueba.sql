@@ -35,15 +35,16 @@ call tipo_add ('gato', "Munchkin");
 call tipo_add ('gato', "Bombay");
 
 /* Agregamos descripciones de mascotas */
-call descripcion_add (1, "maltrato en el hogar", 4, "café", "Macho", "si");
-call descripcion_add (2, "Abandono", 5, "negro", "macho", "si");
-call descripcion_add (13, "encontrado en la calle x", 6, "blanco", "hembra", 'no');
+call descripcion_add (1, "maltrato en el hogar", 4, "café", "Macho", "si", "file:/C:/Users/tans_/Documents/NetBeansProjects/Proyecto/src/proyecto/views/aseets/image/login.png");
+call descripcion_add (2, "Abandono", 5, "negro", "macho", "si", "file:/C:/Users/tans_/Documents/NetBeansProjects/Proyecto/src/proyecto/views/aseets/image/default.png");
+call descripcion_add (13, "encontrado en la calle x", 6, "blanco", "hembra", 'no', "file:/C:/Users/tans_/Documents/NetBeansProjects/Proyecto/src/proyecto/views/aseets/image/registro.png");
 
 /* Agregamos a la mascota */
 call mascota_add (1, 1, "firulais");
-call mascota_add (1, 2, "uncharted");
+call mascota_add (1, 2, "zeus");
 call mascota_add (2, 3, "solovino");
 
+/* Bloque para probar que los procedimientos  update y delete funcionan bien */
 call admin_update (1, "Juan", "Perez", "Perez", 12345678, "juan", "perez");
 call rescatista_update (1, "resca1", "juarez", "morales", 55667788);
 call tipo_update (1, "perro", "Bull terrier");
@@ -53,10 +54,10 @@ call mascota_update (5, 1, 4, "zeus");
 call admin_delete (1);
 call rescatista_delete (2);
 call tipo_delete (12);
-call descripcion_delete (3);
+call descripcion_delete (1);
 call mascota_delete (9);
 
-select * from mascota;
+select * from descripcion;
 /* devuelve el id del último registro ingresado, independiente de la tabla */
 /* select @@identity as id from rescatista; */
 /* devuelve el último id ingresado en la tabla indicada (solo para auto_increment) */

@@ -34,6 +34,7 @@ create table Descripcion(
     Color varchar(30),
     Sexo varchar(10),
     Vacuna varchar(10),
+    urlImagen varchar(300),
     
     foreign key (TIPOANIMAL) references Tipo (IDTIPO)
     on delete cascade
@@ -104,11 +105,12 @@ create procedure descripcion_add (
     edad tinyint,
     color varchar(30),
     sexo varchar(10),
-    vacuna varchar(10)
+    vacuna varchar(10),
+    url varchar(300)
 )
 begin
-	insert into Descripcion (TIPOANIMAL, Historia, Edad, Color, Sexo, Vacuna)
-    values (tipo, historia, edad, color, sexo, vacuna);
+	insert into Descripcion (TIPOANIMAL, Historia, Edad, Color, Sexo, Vacuna, urlImagen)
+    values (tipo, historia, edad, color, sexo, vacuna, url);
 end**
 delimiter ;
 
@@ -184,7 +186,8 @@ create procedure descripcion_update (
     edad int,
     color varchar(30),
     sexo varchar(10),
-    vacuna varchar(10)
+    vacuna varchar(10),
+    url varchar(300)
 )
 begin
 	update descripcion set TIPOANIMAL = tipo where IDDESCRIPCION = id;
@@ -193,6 +196,7 @@ begin
     update descripcion set Color = color where IDDESCRIPCION = id;
     update descripcion set Sexo = sexo where IDDESCRIPCION = id;
     update descripcion set Vacuna = vacuna where IDDESCRIPCION = id;
+    update descripcion set urlImagen = url where IDDESCRIPCION = id;
 end**
 delimiter ;
 
